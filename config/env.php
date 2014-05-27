@@ -14,8 +14,8 @@ define('CACHE_DATA', false); //启用DATA缓存模块
 //自定义系统变量，MY_打头
 define('MY_CACHE_OCP', true); //动态压缩图片，缓存压缩结果
 define('MY_ENV', 'DEV'); //当前环境
-define('MY_HOMEPAGE_URL', 'http://admincp.duo.com'); //后台首页
-define('MY_DEFAULT_ERROR_URL', 'http://admincp.duo.com/error.html');
+define('MY_HOMEPAGE_URL', 'http://www.duo.com'); //后台首页
+define('MY_DEFAULT_ERROR_URL', MY_HOMEPAGE_URL.'/error.html');
 define('MY_DEBUG_PAY_SUCC', true); //调试模拟打款成功
 
 //redis数据源配置，REDIS打头，格式：IP:PORT:DATABASE
