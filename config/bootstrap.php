@@ -48,11 +48,4 @@ function excel2array($file, $valide_title=array()){
 
 	return $ret;
 }
-
-//从淘宝订单拉出用户标识
-function getTaobaoNo($order_id){
-	if(!$order_id)return;
-
-	return substr($order_id, -4);
-}
 ?>

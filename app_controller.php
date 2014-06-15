@@ -20,9 +20,7 @@ class AppController extends Controller {
 	function beforeRender() {
 
 		parent::beforeRender();
-		$this->set('YESNO', C('yesno'));
-		$this->set('title', '多省钱 - 管理后台');
-		$this->setAjax();
+		die();
 	}
 
 	//自动识别ajax

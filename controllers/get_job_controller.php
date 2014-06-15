@@ -3,9 +3,5 @@
 class GetJobController extends AppController {
 
 	var $name = 'GetJob';
-
-	function beforeRender() {
-		die();
-	}
 }
 ?>
