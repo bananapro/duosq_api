@@ -5,6 +5,7 @@ class AppController extends Controller {
 	var $uses = array(); //不使用默认的model，全部数据访问使用数据层DAL()
 	var $cacheAction = array(); //$_GET:del_cache 参数清理缓存| 调试模式也会自动清除缓存
 	var $loginValide = 0;
+	var $filterParam = true; //底层过滤所有入参
 
 	function beforeFilter() {
 
@@ -17,10 +18,11 @@ class AppController extends Controller {
 		}
 	}
 
+	//禁止所有模板输出，跳过错误输出
 	function beforeRender() {
-
 		parent::beforeRender();
-		die();
+		if(!@$_POST['fatel_error'])
+			die();
 	}
 
 	//自动识别ajax
@@ -62,6 +64,24 @@ class AppController extends Controller {
 		else return false;
 	}
 
+	//格式化字符串参数
+	function _fStr($string=''){
+
+		if(!$string)return '';
+		$string = strip_tags($string);
+		if(preg_match('/select|inert|update|delete|\'|\/\*|\*|\.\.\/|\.\/|UNION|into|load_file|outfile/i', $string)){
+
+			D('log')->action(1800, 1, array('data1'=>$string, 'data2'=>$_SERVER['REQUEST_URI'], 'data4'=>json_encode($_GET), 'data5'=>json_encode($_POST)));
+			$string = '';
+		}
+		return $string;
+	}
+
+	//格式化数字参数
+	function _fNum($num=0){
+		return intval($num);
+	}
+
 	function _success($message = '', $force_api = false) {
 
 		if ($message === '') $message = '操作成功!';
@@ -87,6 +107,7 @@ class AppController extends Controller {
 		if (!$message) $message = '系统发生错误，请重试!';
 
 		if (!DEBUG) {
+
 			if ($this->isAjax() || $force_api) {
 				if ($this->isJsonp()) {
 					$this->_jsonpReturn($message, 0);
@@ -116,6 +137,8 @@ class AppController extends Controller {
 	}
 
 	function appError($type, $message){
+
+		$_POST['fatel_error'] = 1;
 		if(!DEBUG) //调试模式将会抛出错误
 			$this->flash('您查找的链接不存在，系统将自动返回首页', '/', 5);
 	}

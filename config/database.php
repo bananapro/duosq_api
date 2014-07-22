@@ -14,6 +14,13 @@ class DATABASE_CONFIG {
 		'database' => 'duosq',
 		'prefix' => '');
 
+	var $promotion = array('driver' => 'mysqli',
+		'connect' => 'mysql_connect',
+		'host' => 'localhost',
+		'login' => 'duosq',
+		'password' => '123456',
+		'database' => 'duosq_promotion',
+		'prefix' => '');
 }
 
 ?>

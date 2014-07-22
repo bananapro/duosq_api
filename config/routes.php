@@ -6,4 +6,5 @@
  * to use (in this case, /app/views/default/index.thtml)...
  */
 $Route->connect('/', array('controller' => 'default', 'action' => 'index'));
+$Route->connect('/mobi/*', array('controller' => 'mobi', 'action' => 'entry'));
 ?>
