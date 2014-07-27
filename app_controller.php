@@ -91,6 +91,7 @@ class AppController extends Controller {
 				if ($this->isJsonp()) {
 					$this->_jsonpReturn($message, 1);
 				} else {
+					header("Content-type: application/json");
 					echo json_encode(array('message' => $message, 'status' => 1));
 				}
 			} else {
@@ -112,6 +113,7 @@ class AppController extends Controller {
 				if ($this->isJsonp()) {
 					$this->_jsonpReturn($message, 0);
 				} else {
+					header("Content-type: application/json");
 					echo json_encode(array('message' => $message, 'status' => 0));
 				}
 			} else {

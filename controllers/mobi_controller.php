@@ -25,7 +25,7 @@ class MobiController extends AppController {
 	//搜索提示
 	function suggest_v1(){
 
-		$keyword = $this->_fStr(trim(@$_REQUEST['k']));
+		$keyword = trim(@$_REQUEST['k']);
 
 		if(!$keyword){
 			$this->_error('字符为空或无效字符');
@@ -35,7 +35,7 @@ class MobiController extends AppController {
 			$this->_error('请勿超过100字符');
 		}
 
-		$suggest = D('promotion')->getSuggest($keyword);
+		$suggest = D('promotion')->getSuggest($keyword, 6, false);
 
 		if($suggest){
 			$ret = array();
@@ -49,7 +49,7 @@ class MobiController extends AppController {
 	}
 
 	//手机按钮消息数提示
-	function notify_v1(){
+	function notifyNum_v1(){
 
 		$data = array();
 		$data['btn_1'] = 11;

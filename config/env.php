@@ -15,6 +15,7 @@ define('CACHE_DATA', true); //启用DATA缓存模块
 define('MY_CACHE_OCP', true); //动态压缩图片，缓存压缩结果
 define('MY_ENV', 'DEV'); //当前环境
 define('MY_HOMEPAGE_URL', 'http://www.duo.com'); //后台首页
+define('MY_STATIC_URL', 'http://www.duo.com'); //静态CDN域名
 define('MY_DEFAULT_ERROR_URL', MY_HOMEPAGE_URL.'/error.html');
 define('MY_DEBUG_PAY_SUCC', true); //调试模拟打款成功
 
