@@ -79,15 +79,15 @@ class MobiController extends AppController {
 
 		$counter = D('promotion')->redis('promotion')->getPromoCatCountDate();
 
-		$data['btn_1'] = count($counter['服装鞋子']);
-		$data['btn_2'] = count($counter['手机数码']);
-		$data['btn_3'] = count($counter['箱包配饰']);
-		$data['btn_4'] = count($counter['美妆个护']);
-		$data['btn_5'] = count($counter['母婴用品']);
-		$data['btn_6'] = count($counter['家居日用']);
-		$data['btn_7'] = count($counter['美食生鲜']);
+		$data['100'] = count(@$counter['服装鞋子']);
+		$data['101'] = count(@$counter['手机数码']);
+		$data['104'] = count(@$counter['箱包配饰']);
+		$data['103'] = count(@$counter['美妆个护']);
+		$data['105'] = count(@$counter['母婴用品']);
+		$data['106'] = count(@$counter['家居日用']);
+		$data['107'] = count(@$counter['美食生鲜']);
 
-		$data['btn_subscribe'] = 0;
+		$data['111'] = 0;
 
 		$device_id = @$_GET['device_id'];
 		$platform = @$_GET['platform'];
@@ -95,7 +95,7 @@ class MobiController extends AppController {
 			$this->_success(array('content'=>$data), true);
 		}else{
 			//读取未读订阅数
-			$data['btn_subscribe'] = D('subscribe')->getUnOpenedMessageCount($device_id, $platform);
+			$data['111'] = D('subscribe')->getUnOpenedMessageCount($device_id, $platform);
 		}
 
 		$this->_success(array('content'=>$data), true);
