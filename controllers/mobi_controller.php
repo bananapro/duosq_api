@@ -79,16 +79,16 @@ class MobiController extends AppController {
 
 		$counter = D('promotion')->redis('promotion')->getPromoCatCountDate();
 
-		$data['100'] = count(@$counter['服装鞋子']);
-		$data['101'] = count(@$counter['手机数码']);
-		$data['104'] = count(@$counter['箱包配饰']);
-		$data['103'] = count(@$counter['美妆个护']);
-		$data['105'] = count(@$counter['母婴用品']);
-		$data['106'] = count(@$counter['家居日用']);
-		$data['107'] = count(@$counter['美食生鲜']);
-
+		$data['100'] = intval(@$counter['服装鞋子']);
+		$data['101'] = intval(@$counter['手机数码']);
+		$data['104'] = intval(@$counter['箱包配饰']);
+		$data['103'] = intval(@$counter['美妆个护']);
+		$data['105'] = intval(@$counter['母婴用品']);
+		$data['106'] = intval(@$counter['家居日用']);
+		$data['107'] = intval(@$counter['美食生鲜']);
+		$data['101'] = 30;
+		$data['103'] = 133;
 		$data['111'] = 0;
-
 		$device_id = @$_GET['device_id'];
 		$platform = @$_GET['platform'];
 		if(!$device_id || !valid($device_id, 'device_id') || !in_array($platform, array('ios','android'))){
