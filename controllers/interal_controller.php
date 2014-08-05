@@ -3,6 +3,7 @@
 class InteralController extends AppController {
 
 	var $name = 'Interal';
+	var $signVerify = false;
 
 	function pay($user_id){
 

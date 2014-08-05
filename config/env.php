@@ -18,6 +18,7 @@ define('MY_HOMEPAGE_URL', 'http://www.duo.com'); //后台首页
 define('MY_STATIC_URL', 'http://www.duo.com'); //静态CDN域名
 define('MY_DEFAULT_ERROR_URL', MY_HOMEPAGE_URL.'/error.html');
 define('MY_DEBUG_PAY_SUCC', true); //调试模拟打款成功
+define('MY_API_SECRET', '34957554883'); //对外API签名秘钥
 
 //redis数据源配置，REDIS打头，格式：IP:PORT:DATABASE
 define('REDIS_SESSION', '127.0.0.1:6379'); //session专用

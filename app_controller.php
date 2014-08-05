@@ -6,29 +6,52 @@ class AppController extends Controller {
 	var $cacheAction = array(); //$_GET:del_cache 参数清理缓存| 调试模式也会自动清除缓存
 	var $loginValide = 0;
 	var $filterParam = true; //底层过滤所有入参
+	var $signVerify = true; //是否验签
 
 	function beforeFilter() {
 
 		parent::beforeFilter();
 		header('Content-Type: text/html; charset=UTF-8');
 
-		if ($this->loginValide && !D('myuser')->isLogined()) {
+		if($this->loginValide && !D('myuser')->isLogined()) {
 			if ($this->action == 'index' && $this->name == 'Default') $this->redirect('/Login');
-			else $this->flash('您尚未登陆多省钱，或已经超时，请重新登陆!', '/', 5);
+			else $this->flash('您尚未登陆，或已经超时，请重新登陆!', '/', 5);
+		}
+
+		if($this->signVerify){
+
+			$params = array_merge((array)$_GET, (array)$_POST);
+			$sn = $params['sn'];
+			unset($params['url']);
+			unset($params['sn']);
+
+			$pass = false;
+			if($params){
+				$i_sn = apiSign($params);
+				if($sn && $i_sn == $sn){
+					$pass = true;
+				}
+			}else{
+				$pass = true;
+			}
+
+			if(!$pass){
+				$this->_error('api signature error!');
+			}
 		}
 	}
 
 	//禁止所有模板输出，跳过错误输出
 	function beforeRender() {
 		parent::beforeRender();
-		if(!@$_POST['fatel_error'])
+		if(!@$_POST['fatal_error'])
 			die();
 	}
 
 	//自动识别ajax
 	function setAjax() {
 
-		if ($this->isAjax()) {
+		if($this->isAjax()) {
 			$this->layout = 'ajax';
 			// Add UTF-8 header for IE6 on XPsp2 bug
 			header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
@@ -39,9 +62,9 @@ class AppController extends Controller {
 
 	function isAjax() {
 
-		if (env('HTTP_X_REQUESTED_WITH') != null) {
+		if(env('HTTP_X_REQUESTED_WITH') != null) {
 			return env('HTTP_X_REQUESTED_WITH') == "XMLHttpRequest";
-		} else {
+		}else{
 			return false;
 		}
 	}
@@ -60,7 +83,7 @@ class AppController extends Controller {
 
 	function checkFlash() {
 
-		if (isset($_SESSION['Message']['flash']) && $_SESSION['Message']['flash']) return true;
+		if(isset($_SESSION['Message']['flash']) && $_SESSION['Message']['flash']) return true;
 		else return false;
 	}
 
@@ -82,6 +105,7 @@ class AppController extends Controller {
 		return intval($num);
 	}
 
+	//API格式化成功返回
 	function _success($message = '', $force_api = false) {
 
 		if ($message === '') $message = '操作成功!';
@@ -103,6 +127,7 @@ class AppController extends Controller {
 		die();
 	}
 
+	//API格式化错误返回
 	function _error($message = '', $force_api = false) {
 
 		if (!$message) $message = '系统发生错误，请重试!';
@@ -138,11 +163,12 @@ class AppController extends Controller {
 		exit;
 	}
 
+	//内部报错
 	function appError($type, $message){
 
-		$_POST['fatel_error'] = 1;
+		$_POST['fatal_error'] = 1;
 		if(!DEBUG) //调试模式将会抛出错误
-			$this->flash('您查找的链接不存在，系统将自动返回首页', '/', 5);
+			$this->_error('您查找的链接不存在，系统将自动返回首页', '/', 5);
 	}
 }
 ?>
