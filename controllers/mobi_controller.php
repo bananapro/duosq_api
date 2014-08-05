@@ -5,7 +5,6 @@ class MobiController extends AppController {
 
 	var $name = 'Mobi';
 	var $version = 'v1';
-	var $signVerify = false;
 
 	//route做了重定向，全部会指向此处
 	function entry(){

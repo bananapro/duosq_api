@@ -36,7 +36,7 @@ class AppController extends Controller {
 			}
 
 			if(!$pass){
-				$this->_error('api signature error!');
+				$this->_error('api signature error!', true);
 			}
 		}
 	}
