@@ -87,24 +87,6 @@ class AppController extends Controller {
 		else return false;
 	}
 
-	//格式化字符串参数
-	function _fStr($string=''){
-
-		if(!$string)return '';
-		$string = strip_tags($string);
-		if(preg_match('/select|inert|update|delete|\'|\/\*|\*|\.\.\/|\.\/|UNION|into|load_file|outfile/i', $string)){
-
-			D('log')->action(1800, 1, array('data1'=>$string, 'data2'=>$_SERVER['REQUEST_URI'], 'data4'=>json_encode($_GET), 'data5'=>json_encode($_POST)));
-			$string = '';
-		}
-		return $string;
-	}
-
-	//格式化数字参数
-	function _fNum($num=0){
-		return intval($num);
-	}
-
 	//API格式化成功返回
 	function _success($message = '', $force_api = false) {
 
