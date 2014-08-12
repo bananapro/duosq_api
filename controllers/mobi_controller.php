@@ -77,7 +77,8 @@ class MobiController extends AppController {
 
 		$data = array();
 
-		$counter = D('promotion')->redis('promotion')->getPromoCatCountDate();
+		$stat = D('promotion')->getStat();
+		$counter = $stat['num_promo_cat_today'];
 
 		$data['100'] = intval(@$counter['服装鞋子']);
 		$data['101'] = intval(@$counter['手机数码']);
