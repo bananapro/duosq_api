@@ -87,8 +87,6 @@ class MobiController extends AppController {
 		$data['105'] = intval(@$counter['母婴用品']);
 		$data['106'] = intval(@$counter['家居日用']);
 		$data['107'] = intval(@$counter['美食生鲜']);
-		$data['101'] = 30;
-		$data['103'] = 133;
 		$data['111'] = 0;
 		$device_id = @$_GET['device_id'];
 		$platform = @$_GET['platform'];

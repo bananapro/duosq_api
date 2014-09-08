@@ -21,7 +21,7 @@ class AppController extends Controller {
 		if($this->signVerify){
 
 			$params = array_merge((array)$_GET, (array)$_POST);
-			$sn = $params['sn'];
+			$sn = @$params['sn'];
 			unset($params['url']);
 			unset($params['sn']);
 
