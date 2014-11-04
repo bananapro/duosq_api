@@ -1,1 +1,10 @@
-document.write('<div style="position: fixed;z-index: 1000;width: 330px; height: 285px; right: 5px; bottom: 10px; "><a href="http://121.199.10.168/adv/click" target="_blank"><img src="http://c1.duosq.com/img/adv/adv_330x285_3.png" width="330" height="285"/></a></div>');
+document.writeln('<div style="position: fixed;z-index: 1000;width: 300px; height: 300px; right: 5px; bottom: 10px; "><a href="http://121.199.10.168/adv/click" target="_blank"><img src="<?=MY_STATIC_URL?>/img/adv/adv_300x300_6.png" width="300" height="300"/></a></div>');
+document.writeln('<div style="display:none"><script src="http://s6.cnzz.com/stat.php?id=1253359603&web_id=1253359603" language="JavaScript"><\/s'+'cript></div>');
+
+if(document.referrer){
+	if(parseInt(10*Math.random()) > 6){
+		window.location.href = 'http://121.199.10.168/adv/click/baozipu_cpm';
+		//window.location.href = 'http://hd.51wan.com/20878p1206q542j0.html';//51wan 灵将
+		//window.location.href = 'http://u.9wee.com/pop/sg/sg_110523.php?q=82028335_102_-OCVCMiVEQ3Y4JUIzJTg5JTdGLSU5MEslM0MtJTkxJTgxbzElRjYlOUUlOERxRg==-';//9wee 武林三国
+	}
+}

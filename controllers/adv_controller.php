@@ -45,11 +45,15 @@ class AdvController extends AppController {
 			//选取一定几率
 			$rand = rand(1,10);
 			//if($rand > 3)die('<!--rand-->');
+
+			if(getBrowser()=='ie6' || getBrowser()=='ie7'){
+				//die('<!--ie6/ie7-->');
+			}
 		}
 	}
 
 	//点击广告
-	function click(){
+	function click($sc='baozipu'){
 
 		if(isMobile()){
 			$target = MY_WWW_URL.'/subscribe/app';
@@ -57,9 +61,16 @@ class AdvController extends AppController {
 			$target = '/subscribe';
 		}
 
-		$target = 'http://www.baozipu.com';
+		$target = MY_WWW_URL.'/huodong?code='.md5(date('Ymd').'kkey');
 
-		$this->redirect(MY_WWW_URL . '/mark?sc=baozipu&t='.urlencode($target));
+		$this->redirect(MY_WWW_URL . '/mark?sc='.$sc.'&t='.urlencode($target));
+	}
+
+	//点击跳转
+	function jump(){
+
+		if(!$_GET['t'])$_GET['t'] = MY_WWW_URL.'/huodong?code='.md5(date('Ymd').'kkey');
+		$this->redirect($_GET['t']);
 	}
 }
 ?>
