@@ -87,14 +87,23 @@ class MobiController extends AppController {
 		$data['105'] = intval(@$counter['母婴用品']);
 		$data['106'] = intval(@$counter['家居日用']);
 		$data['107'] = intval(@$counter['美食生鲜']);
-		$data['111'] = 0;
+
+		//旧版废除，显示假数据
+		$data['111'] = 87;
+		$data['100'] = 82;
+		$data['101'] = 30;
+		$data['104'] = 42;
+		$data['103'] = 53;
+		$data['105'] = 64;
+		$data['106'] = 42;
+		$data['107'] = 26;
 		$device_id = @$_GET['device_id'];
 		$platform = @$_GET['platform'];
 		if(!$device_id || !valid($device_id, 'device_id') || !in_array($platform, array('ios','android'))){
 			$this->_success(array('content'=>$data), true);
 		}else{
 			//读取未读订阅数
-			$data['111'] = D('subscribe')->getUnOpenedMessageCount($device_id, $platform);
+			//$data['111'] = D('subscribe')->getUnOpenedMessageCount($device_id, $platform);
 		}
 
 		$this->_success(array('content'=>$data), true);
