@@ -52,11 +52,11 @@ class MobiController extends AppController {
 		$keyword = trim(@$_REQUEST['k']);
 
 		if(!$keyword){
-			$this->_error('字符为空或无效字符');
+			$this->_error('字符为空或无效字符', true);
 		}
 
 		if(mb_strlen($keyword, 'utf8') > 100){
-			$this->_error('请勿超过100字符');
+			$this->_error('请勿超过100字符', true);
 		}
 
 		$suggest = D('promotion')->getSuggest($keyword, 6, false);
@@ -105,8 +105,18 @@ class MobiController extends AppController {
 			//读取未读订阅数
 			//$data['111'] = D('subscribe')->getUnOpenedMessageCount($device_id, $platform);
 		}
-
 		$this->_success(array('content'=>$data), true);
+	}
+
+	//android系统升级
+	function versionCheck_v1(){
+
+		$data = array();
+		$data['latestVersion'] = 4;
+		$data['url'] = 'http://www.duosq.com/appconfig/android_2.0.apk';
+		$data['message'] = '我们有最新版本了，超给力';
+		$data['forceUpdate'] = 1;
+		$this->_success($data, true);
 	}
 }
 ?>

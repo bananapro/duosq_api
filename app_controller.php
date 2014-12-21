@@ -114,6 +114,7 @@ class AppController extends Controller {
 
 		if (!$message) $message = '系统发生错误，请重试!';
 
+		$_POST['fatal_error'] = 1;
 		if (!DEBUG) {
 
 			if ($this->isAjax() || $force_api) {
