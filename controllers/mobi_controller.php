@@ -113,7 +113,7 @@ class MobiController extends AppController {
 
 		$data = array();
 		$data['latestVersion'] = 4;
-		$data['url'] = 'http://www.duosq.com/appconfig/android_2.0.apk';
+		$data['url'] = 'http://www.duosq.com/app.apk';
 		$data['message'] = '我们有最新版本了，超给力';
 		$data['forceUpdate'] = 1;
 		$this->_success($data, true);
